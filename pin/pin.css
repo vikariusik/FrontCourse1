@@ -1,0 +1,90 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+#pinsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 30px;
+}
+
+.pin {
+  width: 200px;
+  background-color: transparent;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.image-wrapper {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.image-wrapper:hover {
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.35);
+}
+
+.main-photo {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.actions {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: none;
+}
+
+.image-wrapper:hover .actions {
+  display: block;
+}
+
+.dots-btn {
+  background-color: transparent;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 100%;
+  padding: 0 5px 5px 5px;
+}
+
+.user-info img.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-info span {
+  font-size: 14px;
+  color: #000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
