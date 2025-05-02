@@ -1,4 +1,4 @@
-import { saveToLocalStorage, saveToMockAPI } from '../Helper.js';
+import { saveToLocalStorage, saveToMockAPI, savePinBoardLink } from '../Helper.js';
 
 export function openModal(existingPin = null) {
   const modal = document.createElement('div');
@@ -32,6 +32,36 @@ export function openModal(existingPin = null) {
     await saveToMockAPI(pin);
 
     modal.remove();
-    location.reload(); // обновим пины 
+    location.reload();
+  };
+}
+
+export function openBoardSelectModal(pinId) {
+  const modal = document.createElement('div');
+  modal.classList.add('modal-overlay');
+
+  modal.innerHTML = `
+    <div class="modal">
+      <h2>Сохранить на доску</h2>
+      <select id="board-select">
+        <option value="Favorites">Favorites</option>
+        <option value="Recipes">Recipes</option>
+        <option value="Inspiration">Inspiration</option>
+      </select>
+      <div class="modal-buttons">
+        <button id="save-board">Сохранить</button>
+        <button id="cancel-modal">Отмена</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  modal.querySelector("#cancel-modal").onclick = () => modal.remove();
+
+  modal.querySelector("#save-board").onclick = () => {
+    const boardName = document.getElementById('board-select').value;
+    savePinBoardLink(pinId, boardName);
+    modal.remove();
   };
 }
