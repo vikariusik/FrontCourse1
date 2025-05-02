@@ -25,6 +25,7 @@ function createPin({ id, image, user, description }) {
 
     return pin;
 }
+export { createPin };
 
 // Пример (фото добавила свои, потому что по-другому ничего не отображалось)
 const mockPinData = {
