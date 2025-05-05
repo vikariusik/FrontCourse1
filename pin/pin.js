@@ -9,6 +9,10 @@ function createPin({ id, image, user, description }) {
             <img src="${image}" alt="photo" class="main-photo">
             <div class="actions">
                 <button class="dots-btn" data-id="${id}">&#8230;</button>
+                <div class="opened-menu hidden">
+                    <div class="menu-item">Добавить на доску</div>
+                    <div class="menu-item">Пожаловаться</div>
+                </div>
             </div>
         </div>
         <div class="user-info">
@@ -18,9 +22,17 @@ function createPin({ id, image, user, description }) {
     `;
 
     // Обработчик для кнопки с тремя точками 
-    pin.querySelector('.dots-btn').addEventListener('click', () => {
-        console.log(`Модалка для выпадающего списка с досками ${id}`);
+    const dotsBtn = pin.querySelector('.dots-btn')
+    const openedMenu = pin.querySelector('.opened-menu');
+
+    dotsBtn.addEventListener('click', (el) => {
+        el.stopPropagation();
+        openedMenu.classList.toggle('hidden');
         // Можно добавить код для открытия модального окна
+    });
+
+    document.addEventListener('click', () => {
+        openedMenu.classList.add('hidden');
     });
 
     return pin;
