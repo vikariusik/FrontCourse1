@@ -1,6 +1,4 @@
-const pinsContainer = document.getElementById('pinsContainer');
-
-function createPin({ id, image, user, description }) {
+export function createPin({ id, image, user, description }, clickMenuAdd, clickMenuComplaint) {
     const pin = document.createElement('div');
     pin.className = 'pin';
 
@@ -10,8 +8,8 @@ function createPin({ id, image, user, description }) {
             <div class="actions">
                 <button class="dots-btn" data-id="${id}">&#8230;</button>
                 <div class="opened-menu hidden">
-                    <div class="menu-item">Добавить на доску</div>
-                    <div class="menu-item">Пожаловаться</div>
+                    <div class="menu-item" id="menu-add-to-board">Добавить на доску</div>
+                    <div class="menu-item" id="menu-complaint">Пожаловаться</div>
                 </div>
             </div>
         </div>
@@ -31,15 +29,23 @@ function createPin({ id, image, user, description }) {
         // Можно добавить код для открытия модального окна
     });
 
+   const menuAdd = pin.querySelector("#menu-add-to-board");
+   menuAdd.addEventListener('click', () => clickMenuAdd(id));
+
+   const menuComplaint = pin.querySelector("#menu-complaint");
+   menuComplaint.addEventListener('click', () => clickMenuComplaint(id));
+
     document.addEventListener('click', () => {
         openedMenu.classList.add('hidden');
     });
 
     return pin;
 }
-export { createPin };
 
 // Пример (фото добавила свои, потому что по-другому ничего не отображалось)
+
+const pinsContainer = document.getElementById('pinsContainer');
+
 const mockPinData = {
     id: '1',
     image: 'pin_media_example/main.jpg',
@@ -50,6 +56,10 @@ const mockPinData = {
     }
 };
 
+let mockPinData2 = {...mockPinData};
+mockPinData2.description = 'Закат надо морем2'
+mockPinData2.id = 2
 
 // Добавляем (тут не до конца уверена)
-pinsContainer.appendChild(createPin(mockPinData));
+pinsContainer.appendChild(createPin(mockPinData, (x) => alert(`menu-add-to-board ${x}`), (x) => alert(`menu-complaint ${x}`)));
+pinsContainer.appendChild(createPin(mockPinData2, (x) => alert(`menu-add-to-board ${x}`), (x) => alert(`menu-complaint ${x}`)));
