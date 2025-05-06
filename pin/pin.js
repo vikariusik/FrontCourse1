@@ -1,4 +1,4 @@
-export function createPin({ id, image, user, description }, clickMenuAdd, clickMenuComplaint) {
+export function createPin({ id, image, user, description }, boardList = [], clickMenuAdd, clickMenuComplaint) {
     const pin = document.createElement('div');
     pin.className = 'pin';
 
@@ -30,7 +30,7 @@ export function createPin({ id, image, user, description }, clickMenuAdd, clickM
     });
 
    const menuAdd = pin.querySelector("#menu-add-to-board");
-   menuAdd.addEventListener('click', () => clickMenuAdd(id));
+   menuAdd.addEventListener('click', () => clickMenuAdd(id, boardList));
 
    const menuComplaint = pin.querySelector("#menu-complaint");
    menuComplaint.addEventListener('click', () => clickMenuComplaint(id));
@@ -61,5 +61,5 @@ mockPinData2.description = 'Закат надо морем2'
 mockPinData2.id = 2
 
 // Добавляем (тут не до конца уверена)
-pinsContainer.appendChild(createPin(mockPinData, (x) => alert(`menu-add-to-board ${x}`), (x) => alert(`menu-complaint ${x}`)));
-pinsContainer.appendChild(createPin(mockPinData2, (x) => alert(`menu-add-to-board ${x}`), (x) => alert(`menu-complaint ${x}`)));
+pinsContainer.appendChild(createPin(mockPinData, ['Избранное', 'Работа'], (id, boards) => alert(`menu-add-to-board ${id}`), (id) => alert(`menu-complaint ${id}`)));
+pinsContainer.appendChild(createPin(mockPinData2, ['Избранное', 'Работа'], (id, boards) => alert(`menu-add-to-board ${id}`), (id) => alert(`menu-complaint ${id}`)));
