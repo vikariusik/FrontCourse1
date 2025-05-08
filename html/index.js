@@ -1,6 +1,6 @@
-import { createPin } from './pin.js';
-import { openBoardSelectModal } from './modal.js';
-import { openReportModal } from './reportModal.js';
+import { createPin } from '../pin/pin.js';
+import { openBoardSelectModal } from '../src/components/modal/modal.js';
+import { openReportModal } from '../src/components/modal/reportModal.js';
 
 // DOM-элементы
 const pinsContainer = document.getElementById('pinsContainer');

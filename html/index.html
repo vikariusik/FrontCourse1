@@ -3,29 +3,41 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-	<link rel="stylesheet" href="../html/styles/index.css">
-	<link rel="stylesheet" href="../pin/pin.css">
-	<link rel="stylesheet" href="../src/components/modal/modal.scss">
+	<link rel="stylesheet" href="./styles/index.css">
+	<link rel="stylesheet" href="./pin/pin.css">
+	<link rel="stylesheet" href="./components/modal/modal.css">
+	<title>Pinterest</title>
 
 </head>
 <body>
-	<header class="header">
-		<div class="header__logo">Pinterest</div>
-		<div class="header__search">
-			<input id="searchInput" class="header__search-input" type="text" placeholder="Поиск по хэштегу">
-			<button id="boardsBtn" class="header__boards-button">Выбрать доску ▼</button>
-			<div id="boardsDropdown" class="boards__dropdown hidden"></div>			
-			<!-- Доски появятся через JS -->
-		  </div>
-		</div>
-	  </header>
-	
-	  <main class="main">
-		<div id="pinsContainer" class="pins__grid"></div>
-	  </main>
+	<div class="app">
+		<header class="app__header">
+			<h1>Pinterest</h1>
+
+			<!-- Поисковая строка -->
+			<input id="searchInput" type="search" placeholder="Search">
+
+			<!-- Кнопка "Boards" и выпадающий список -->
+			<div class="header__boards">
+				<button id="boardsBtn" class="boards__btn">Boards</button>
+				<div id="boardsDropdown" class="boards__dropdown hidden"></div>
+			</div>
+		</header>
+
+		<main class="app__content">
+			<!-- Контейнер для пинов -->
+			<div id="pinsContainer" class="pins__grid">
+				<!-- Pins will be rendered here -->
+			</div>
+		</main>
+	</div>
 	
 	<!-- Мой модуль -->
-	<script type="module" src="../html/index.js"></script>
+	<script type="module" src="./index.js"></script>
+	<script type="module" src="./pin/pin.js"></script>
+	<script type="module" src="./components/modal/modal.js"></script>
+	<script type="module" src="./components/Helper.js"></script>
+	<script type="module" src="./components/reportModal.js"></script>
+
 </body>
 </html>
