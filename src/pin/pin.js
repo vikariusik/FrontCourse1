@@ -42,24 +42,3 @@ export function createPin({ id, image, user, description }, boardList = [], clic
     return pin;
 }
 
-// Пример (фото добавила свои, потому что по-другому ничего не отображалось)
-
-const pinsContainer = document.getElementById('pinsContainer');
-
-const mockPinData = {
-    id: '1',
-    image: 'pin_media_example/main.jpg',
-    description: 'Закат над морем',
-    user: {
-        name: 'Аня',
-        avatar: 'pin_media_example/avatar.png'
-    }
-};
-
-let mockPinData2 = {...mockPinData};
-mockPinData2.description = 'Закат надо морем2'
-mockPinData2.id = 2
-
-// Добавляем (тут не до конца уверена)
-pinsContainer.appendChild(createPin(mockPinData, ['Избранное', 'Работа'], (id, boards) => alert(`menu-add-to-board ${id}`), (id) => alert(`menu-complaint ${id}`)));
-pinsContainer.appendChild(createPin(mockPinData2, ['Избранное', 'Работа'], (id, boards) => alert(`menu-add-to-board ${id}`), (id) => alert(`menu-complaint ${id}`)));
