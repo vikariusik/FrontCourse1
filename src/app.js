@@ -1,60 +1,82 @@
-//import './app.scss'; // Global styles
-import { createPin } from './pin/pin.js';
-import { openBoardSelectModal } from './components/modal/modal.js'
-import { getPinsFromMockAPI } from './components/Helper.js'
+import { createPin } from "./pin/pin.js";
+import { openBoardSelectModal } from "./components/modal/modal.js";
+import { openReportModal } from "./components/modal/reportModal.js";
+import { getPinsFromMockAPI } from "./components/Helper.js";
 
-const pinGrid = document.querySelector('.pin-grid');
+// DOM-элементы
+const pinsContainer = document.getElementById("pinsContainer");
+const searchInput = document.getElementById("searchInput");
+const boardsBtn = document.getElementById("boardsBtn");
+const boardsDropdown = document.getElementById("boardsDropdown");
+
+// Список досок
+const boardList = ["Избранное", "Работа", "Путешествия"];
+
+// Пины
 
 let pins = [];
-let boards = [];
-
-loadData();
 
 async function loadData() {
-  // Example using local data, replace with mockapi.io fetch
-  pins = [
-    {
-      id: '1',
-      image: '/src/pin/pin_media_example/main.jpg',
-      description: 'Закат над морем',
-      user: {
-          name: 'Аня',
-          avatar: '/src/pin/pin_media_example/avatar.png'
-      }
-    }
-  ,
-  {
-    id: '2',
-    image: '/src/pin/pin_media_example/main.jpg',
-    description: 'Закат над морем2',
-    user: {
-        name: 'Аня',
-        avatar: '/src/pin/pin_media_example/avatar.png'
-    }
-  }
-  ];
-
   let pins2 = await getPinsFromMockAPI();
 
-  pins = pins2.map(pin => ({
+  pins = pins2.map((pin) => ({
     id: pin.id,
     image: pin.img,
     description: pin.name,
     user: {
       name: pin.userName,
-      avatar: pin.avatar
-    }
+      avatar: pin.avatar,
+    },
   }));
-
-  boards = ["default","My Board"];
 
   renderPins(pins);
 }
 
-function renderPins(pinData) {
-  pinGrid.innerHTML = ''; // Clear existing pins
-  pinData.forEach(pin => {
-    const pinComponent = createPin(pin, boards, openBoardSelectModal);
-    pinGrid.appendChild(pinComponent);
+// Рендер всех пинов
+function renderPins(pinList) {
+  pinsContainer.innerHTML = "";
+  pinList.forEach((pin) => {
+    const pinEl = createPin(
+      pin,
+      boardList,
+      openBoardSelectModal,
+      openReportModal
+    );
+    pinsContainer.appendChild(pinEl);
   });
 }
+
+// Поиск по хэштегу
+function searchPins(query) {
+  const filtered = pins.filter((pin) =>
+    pin.description.toLowerCase().includes(query.toLowerCase())
+  );
+  renderPins(filtered);
+}
+
+// Обработчики событий
+searchInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    const value = searchInput.value.trim();
+    if (value) {
+      searchPins(value);
+    } else {
+      renderPins(pins);
+    }
+  }
+});
+
+boardsBtn.addEventListener("click", () => {
+  boardsDropdown.classList.toggle("hidden");
+});
+
+// Заполнение списка досок
+boardList.forEach((board) => {
+  const item = document.createElement("div");
+  item.className = "boards__dropdown-item";
+  item.textContent = board;
+  boardsDropdown.appendChild(item);
+});
+
+// Начальная загрузка
+loadData();
