@@ -3,25 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!--<link rel="stylesheet" href="">-->
+  <link rel="stylesheet" href="../styles/index.css">
+  <link rel="stylesheet" href="./pin/pin.css">
+  <link rel="stylesheet" href="./components/modal/modal.css">
   <title>Pinterest Clone</title>
-  <!-- <link rel="stylesheet" href="./app.scss"> -->
 </head>
 <body>
-  <div class="app">
-    <header class="app__header">
-      <h1>Pinterest</h1>
-      <input type="search" placeholder="Search">
-      <select id="board-selector">
-        <option value="">Choose Board</option>
-      </select>
-    </header>
-    <main class="app__content">
-      <div class="pin-grid">
-        <!-- Pins will be rendered here -->
-      </div>
-    </main>
-  </div>
-  <!-- <script type="module" src="./app.js"></script> -->
+	<div class="app">
+		<header class="app__header">
+			<h1>Pinterest</h1>
+
+			<!-- Поисковая строка -->
+			<input id="searchInput" type="search" placeholder="Search">
+
+			<!-- Кнопка "Boards" и выпадающий список -->
+			<div class="header__boards">
+				<button id="boardsBtn" class="boards__btn">Boards</button>
+				<div id="boardsDropdown" class="boards__dropdown hidden"></div>
+			</div>
+		</header>
+
+		<main class="app__content">
+			<!-- Контейнер для пинов -->
+			<div id="pinsContainer" class="pins__grid">
+				<!-- Pins will be rendered here -->
+			</div>
+		</main>
+	</div>
+  <script type="module" src="./app.js"></script>
 </body>
 </html>

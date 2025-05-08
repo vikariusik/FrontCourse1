@@ -4,8 +4,8 @@
       "description": "A Pinterest clone built with Parcel and modern JavaScript.",
       "scripts": {
         "start": "parcel src/index.html",
-        "build": "parcel build src/index.html --dist-dir dist",
-        "clean": "rm -rf dist .parcel-cache"
+        "build": "parcel build src/index.html --no-source-maps",
+        "clean": "Remove-Item -Recurse -Force .parcel-cache"
       },
       "devDependencies": {
         "parcel": "^2.11.0",
