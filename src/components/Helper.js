@@ -1,7 +1,17 @@
 // Связка PinId и доски
 export function savePinBoardLink(pinId, boardName) {
   const links = JSON.parse(localStorage.getItem('pinBoardLinks') || '[]');
-  links.push({ pinId, board: boardName });
+
+  const existingIndex = links.findIndex(link => link.pinId === pinId);
+
+  if (existingIndex !== -1) {
+    if (links[existingIndex].board !== boardName) {
+      links[existingIndex].board = boardName;
+    }
+  } else {
+    links.push({ pinId, board: boardName });
+  }
+
   localStorage.setItem('pinBoardLinks', JSON.stringify(links));
 }
 
