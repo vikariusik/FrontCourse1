@@ -4,16 +4,16 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-  }
-  
-  body {
+}
+
+body {
 	font-family: 'Segoe UI', sans-serif;
-	background-color: #fff;
+	background-color:#f9f9f9;
 	color: #111;
-  }
-  
+}
+
   /* Хэдер */
-  .app__header {
+.app__header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -23,34 +23,48 @@
 	position: sticky;
 	top: 0;
 	z-index: 10;
-  }
-  
-  .header__logo {
+}
+
+.app__header h1 {
+	font-size: 24px;
+	font-weight: bold;
+	color: #e60023;
+}
+
+.header__logo {
 	font-size: 20px;
 	font-weight: bold;
 	color: #e60023;
-  }
-  
-  .header__search {
+}
+
+.header__search {
 	flex: 1;
 	margin: 0 24px;
-  }
-  
-  .search__input {
+}
+
+.search__input {
 	width: 100%;
 	padding: 8px 12px;
 	border-radius: 24px;
 	border: 1px solid #ccc;
 	outline: none;
 	font-size: 14px;
-  }
-  
+}
+
+#searchInput {
+	border-radius: 20px;
+	border: 1px solid #ccc;
+	padding: 8px 16px;
+	width: 300px;
+	font-size: 14px;
+}
+
   /* Кнопка "Доска" */
-  .header__boards {
+.header__boards {
 	position: relative;
-  }
-  
-  .boards__btn {
+}
+
+.boards__btn {
 	background-color: #e60023;
 	color: white;
 	padding: 8px 16px;
@@ -58,10 +72,10 @@
 	border: none;
 	cursor: pointer;
 	font-size: 14px;
-  }
-  
+}
+
   /* Выпадающий список */
-  .boards__dropdown {
+.boards__dropdown {
 	position: absolute;
 	top: 42px;
 	right: 0;
@@ -71,26 +85,44 @@
 	min-width: 160px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 	z-index: 100;
-  }
-  
-  .boards__dropdown-item {
+}
+.boards__dropdown-item {
 	padding: 10px 16px;
 	cursor: pointer;
-  }
-  
-  .boards__dropdown-item:hover {
+	font-size: 14px;
+	transition: background 0.2s ease;
+}
+
+.boards__dropdown-item:hover {
 	background-color: #f0f0f0;
-  }
-  
-  .hidden {
+}
+
+.hidden {
 	display: none;
-  }
-  
+}
+
   /* Сетка пинов */
   .pins__grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-	gap: 16px;
+	column-count: 6; /*не работает, нужно у Ксюши в файле pin.css убрать #pinsContainer display: flex;*/
+	column-gap: 16px;
 	padding: 24px;
+	max-width: 1600px;
+	margin: 0 auto;
   }
   
+  .pins__grid > div {
+	display: inline-block;
+	width: 100%;
+	margin-bottom: 16px;
+	border-radius: 12px;
+	background: white;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+	break-inside: avoid;
+  }
+  
+  .pins__grid img {
+	width: 100%;
+	height: auto;
+	display: block;
+	object-fit: cover;
+  }  
