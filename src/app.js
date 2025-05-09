@@ -51,6 +51,16 @@ function renderPins(pinList) {
 	});
 }
 
+//При клике на логотип "Pinterest" возвращаться на главную
+const logo = document.getElementById("logo");
+
+logo.addEventListener("click", (e) => {
+	e.preventDefault();
+	renderPins(pins); // Показываем все пины
+	searchInput.value = ""; // Очищаем поиск
+});
+
+
 // Поиск по хэштегу
 function searchPins(query) {
 	const filtered = pins.filter((pin) =>
