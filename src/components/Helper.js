@@ -1,25 +1,27 @@
 // Связка PinId и доски
-export function savePinBoardLink(pinId, boardName) {
+export function savePinBoardLink(pin, boardName) {
   const links = JSON.parse(localStorage.getItem('pinBoardLinks') || '[]');
 
-  const existingIndex = links.findIndex(link => link.pinId === pinId);
+  const existingIndex = links.findIndex(link => link.pinId === pin.id);
 
   if (existingIndex !== -1) {
     if (links[existingIndex].board !== boardName) {
       links[existingIndex].board = boardName;
     }
   } else {
-    links.push({ pinId, board: boardName });
+    links.push({ pinId : pin.id, board: boardName });
   }
+
+  pin.board = boardName;
 
   localStorage.setItem('pinBoardLinks', JSON.stringify(links));
 }
 
 
 // Восстановить название доски по PinId
-export function RestorePinBoardLink(pinId) {
+export function restorePinBoardLink(pinId) {
   const links = JSON.parse(localStorage.getItem('pinBoardLinks') || '[]');
-  return links.find(link => link.pinId === pinId)?.board || null;
+  return links.find(link => link.pinId === pinId)?.board || 'Все';
 }
 
 // Получение пинов с MockAPI

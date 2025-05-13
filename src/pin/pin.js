@@ -1,12 +1,12 @@
-export function createPin({ id, image, user, description }, boardList = [], clickMenuAdd, clickMenuComplaint) {
+export function createPin(pinData, boardList = [], clickMenuAdd, clickMenuComplaint) {
     const pin = document.createElement('div');
     pin.className = 'pin';
 
     pin.innerHTML = `
         <div class="image-wrapper">
-            <img src="${image}" alt="photo" class="main-photo">
+            <img src="${pinData.image}" alt="photo" class="main-photo">
             <div class="actions">
-                <button class="dots-btn" data-id="${id}">&#8230;</button>
+                <button class="dots-btn" data-id="${pinData.id}">&#8230;</button>
                 <div class="opened-menu hidden">
                     <div class="menu-item" id="menu-add-to-board">Добавить на доску</div>
                     <div class="menu-item" id="menu-complaint">Пожаловаться</div>
@@ -14,8 +14,8 @@ export function createPin({ id, image, user, description }, boardList = [], clic
             </div>
         </div>
         <div class="user-info">
-            <img src="${user.avatar}" alt="person-photo" class="avatar">
-            <span>${description}</span>
+            <img src="${pinData.user.avatar}" alt="person-photo" class="avatar">
+            <span>${pinData.description}</span>
         </div>
     `;
 
@@ -30,10 +30,10 @@ export function createPin({ id, image, user, description }, boardList = [], clic
     });
 
    const menuAdd = pin.querySelector("#menu-add-to-board");
-   menuAdd.addEventListener('click', () => clickMenuAdd(id, boardList));
+   menuAdd.addEventListener('click', () => clickMenuAdd(pinData, boardList));
 
    const menuComplaint = pin.querySelector("#menu-complaint");
-   menuComplaint.addEventListener('click', () => clickMenuComplaint(id));
+   menuComplaint.addEventListener('click', () => clickMenuComplaint(pinData.id));
 
     document.addEventListener('click', () => {
         openedMenu.classList.add('hidden');
