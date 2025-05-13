@@ -1,6 +1,7 @@
 export function createPin(pinData, boardList = [], clickMenuAdd, clickMenuComplaint) {
     const pin = document.createElement('div');
     pin.className = 'pin';
+    pin.id = 'pin' + pinData.id;
 
     pin.innerHTML = `
         <div class="image-wrapper">
@@ -36,7 +37,9 @@ export function createPin(pinData, boardList = [], clickMenuAdd, clickMenuCompla
     });
 
    const menuAdd = pin.querySelector("#menu-add-to-board");
-   menuAdd.addEventListener('click', () => clickMenuAdd(pinData, boardList));
+   menuAdd.addEventListener('click', () => {
+    clickMenuAdd(pinData, boardList)
+});
 
    const menuComplaint = pin.querySelector("#menu-complaint");
    menuComplaint.addEventListener('click', () => clickMenuComplaint(pinData.id));
