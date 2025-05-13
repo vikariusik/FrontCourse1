@@ -1,7 +1,7 @@
 import { savePinBoardLink } from '../Helper.js';
 
 // === МОДАЛКА: Сохранить пин на доску ===
-export function openBoardSelectModal(pinId, boardList = []) {
+export function openBoardSelectModal(pin, boardList = []) {
   const modal = document.createElement('div');
   modal.classList.add('modal-overlay');
 
@@ -26,7 +26,7 @@ export function openBoardSelectModal(pinId, boardList = []) {
 
   modal.querySelector("#save-board").onclick = () => {
     const boardName = document.getElementById('board-select').value;
-    savePinBoardLink(pinId, boardName);
+    savePinBoardLink(pin, boardName);
     modal.remove();
   };
 }
