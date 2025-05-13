@@ -19,6 +19,12 @@ export function createPin(pinData, boardList = [], clickMenuAdd, clickMenuCompla
         </div>
     `;
 
+    const photo = pin.querySelector('.main-photo')
+    photo.addEventListener('error', function() { 
+        this.onerror = null;
+        this.src = 'https://german-shepherd-dog-breed.ru/images/stories/virtuemart/product/izobrazhenie-vremenno-nedostupno.jpg';
+    })
+
     // Обработчик для кнопки с тремя точками 
     const dotsBtn = pin.querySelector('.dots-btn')
     const openedMenu = pin.querySelector('.opened-menu');
