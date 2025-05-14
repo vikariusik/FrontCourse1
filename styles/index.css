@@ -42,7 +42,29 @@ body {
 	flex: 1;
 	margin: 0 24px;
 }
+.search__wrapper {
+	position: relative;
+	display: inline-block;
+	}
 
+.spinner {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 18px;
+	height: 18px;
+	border: 2px solid #ccc;
+	border-top-color: #e60023;
+	border-radius: 50%;
+	animation: spin 0.6s linear infinite;
+	}
+
+	@keyframes spin {
+	to {
+		transform: translateY(-50%) rotate(360deg);
+	}
+	}
 .search__input {
 	width: 100%;
 	padding: 8px 12px;
@@ -103,27 +125,45 @@ body {
 }
 
   /* Сетка пинов */
-  .pins__grid {
-	column-count: 6; /*не работает, нужно у Ксюши в файле pin.css убрать #pinsContainer display: flex;*/
+.pins__grid {
+	column-count: 5;
 	column-gap: 16px;
 	padding: 24px;
 	max-width: 1600px;
 	margin: 0 auto;
-  }
-  
-  .pins__grid > div {
-	display: inline-block;
+	}
+
+	@media (max-width: 1200px) {
+	.pins__grid {
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	}
+	}
+
+	@media (max-width: 768px) {
+	.pins__grid {
+		grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+	}
+	}
+
+	@media (max-width: 480px) {
+	.pins__grid {
+		grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+	}
+	}
+
+	.pins__grid > div {
+	display: block;
 	width: 100%;
 	margin-bottom: 16px;
 	border-radius: 12px;
-	background: white;
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
 	break-inside: avoid;
-  }
-  
-  .pins__grid img {
+}
+
+.pins__grid img {
 	width: 100%;
 	height: auto;
 	display: block;
 	object-fit: cover;
-  }  
+}  
