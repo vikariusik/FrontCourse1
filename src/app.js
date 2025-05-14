@@ -47,7 +47,92 @@ function renderPins(pinList) {
   });
 }
 
-//При клике на логотип "Pinterest" возвращаться на главную
+// Спиннер
+function showSpinner() {
+  spinner.classList.remove("hidden");
+}
+
+function hideSpinner() {
+  spinner.classList.add("hidden");
+}
+
+// Дебаунс
+function debounce(func, delay) {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    showSpinner();
+    timeout = setTimeout(() => {
+      func(...args);
+      hideSpinner();
+    }, delay);
+  };
+}
+
+// Поиск
+function searchPins(query) {
+  const filtered = pins.filter((pin) =>
+    pin.description.toLowerCase().includes(query.toLowerCase())
+  );
+  renderPins(filtered);
+}
+
+const debouncedSearch = debounce((query) => {
+  if (query.trim()) {
+    searchPins(query);
+  } else {
+    renderPins(pins);
+  }
+}, 1000);
+
+searchInput.addEventListener("input", (e) => {
+  debouncedSearch(e.target.value);
+});
+
+// Клик по логотипу — сброс
+const logo = document.getElementById("logo");
+logo.addEventListener("click", (e) => {
+  e.preventDefault();
+  searchInput.value = "";
+  renderPins(pins);
+});
+
+// Выпадающее меню
+boardsBtn.addEventListener("click", (e) => {
+  boardsDropdown.classList.toggle("hidden");
+  e.stopPropagation();
+});
+
+// Закрытие меню при клике вне
+document.addEventListener("click", (e) => {
+  if (!boardsDropdown.classList.contains("hidden")) {
+    boardsDropdown.classList.add("hidden");
+  }
+});
+
+// Добавление пунктов меню
+boardList.forEach((board) => {
+  const item = document.createElement("div");
+  item.className = "boards__dropdown-item";
+  item.textContent = board;
+  item.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (board === "Все") {
+      renderPins(pins);
+    } else {
+      const filtered = pins.filter((pin) => pin.board === board);
+      renderPins(filtered);
+    }
+    boardsDropdown.classList.add("hidden");
+  });
+  boardsDropdown.appendChild(item);
+});
+
+// Загрузка
+loadData();
+
+
+/*//При клике на логотип "Pinterest" возвращаться на главную
 const logo = document.getElementById("logo");
 
 logo.addEventListener("click", (e) => {
@@ -95,3 +180,4 @@ boardList.forEach((board) => {
 
 // Начальная загрузка
 loadData();
+*/
