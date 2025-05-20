@@ -14,11 +14,14 @@
 			<h1><a href="#" id="logo">Pinterest</a></h1>
 
 			<!-- Поисковая строка -->
-			<input id="searchInput" type="search" placeholder="Search">
+			<div class="search__wrapper">
+			<input id="searchInput" type="search" placeholder="Search" />
+			<div id="spinner" class="spinner hidden"></div>
+			</div>
 
 			<!-- Кнопка "Boards" и выпадающий список -->
 			<div class="header__boards">
-				<button id="boardsBtn" class="boards__btn">Boards</button>
+				<button id="boardsBtn" class="boards__btn">Доски</button>
 				<div id="boardsDropdown" class="boards__dropdown hidden"></div>
 			</div>
 		</header>
